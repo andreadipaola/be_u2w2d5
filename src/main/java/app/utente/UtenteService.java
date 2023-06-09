@@ -21,23 +21,9 @@ public class UtenteService {
 		return utenteRepo.findAll();
 	}
 
-	// Versione 1
-//	public Utente create(Utente u) {
-//		return utenteRepo.save(u);
-//	}
-
-	// Versione 2 con controllo
-//	public Utente create2(Utente u) {
-//		utenteRepo.findByEmail(u.getEmail()).ifPresent(utente -> {
-//			throw new BadRequestException(
-//					"ATTENZIONE!!! L'email con la quale stai cercando di registarti è già in uso da un altro utente");
-//		});
-//		return utenteRepo.save(u);
-//	}
-
 	// -------------------------- POST SU UTENTI --------------------------------
 	// Versione 3 con controllo e payload (POST: http://localhost:3001/utenti) OK
-	public Utente create3(UtentePayload u) {
+	public Utente create(UtentePayload u) {
 		utenteRepo.findByEmail(u.getEmail()).ifPresent(utente -> {
 			throw new BadRequestException(
 					"ATTENZIONE!!! L'email con la quale stai cercando di registarti è già in uso da un altro utente");
