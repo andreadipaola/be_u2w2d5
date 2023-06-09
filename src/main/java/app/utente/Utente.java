@@ -1,11 +1,18 @@
 package app.utente;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import app.dispositivo.Dispositivo;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
@@ -19,7 +26,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Utente {
+public class Utente implements UserDetails {
 	@Id
 	@GeneratedValue
 	@Column(name = "id_utente")
@@ -31,6 +38,8 @@ public class Utente {
 	private String password;
 	@OneToMany(mappedBy = "utente")
 	private List<Dispositivo> dispositivi;
+	@Enumerated(EnumType.STRING)
+	private Role role;
 
 	public Utente(String nome, String cognome, String email, String username, String password) {
 		this.nome = nome;
@@ -38,5 +47,36 @@ public class Utente {
 		this.email = email;
 		this.password = password;
 		this.username = username;
+		this.role = Role.USER;
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return List.of(new SimpleGrantedAuthority(role.name()));
+	}
+
+	@Override
+	public String getUsername() {
+		return this.email;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return false;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return false;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return false;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return false;
 	}
 }

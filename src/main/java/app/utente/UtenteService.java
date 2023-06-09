@@ -61,4 +61,9 @@ public class UtenteService {
 		utenteRepo.delete(found);
 	}
 
+	public Utente findByEmail(String email) throws NotFoundException {
+		return utenteRepo.findByEmail(email).orElseThrow(
+				() -> new NotFoundException("ATTENZIONE!!! L'email che stai cercando non è stata trovata"));
+	}
+
 }
