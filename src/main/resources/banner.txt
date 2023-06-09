@@ -1,0 +1,32 @@
+
+                          .,::::::;::,,.                          
+                     ,:it1i1i11;itiiiiittii:.                     
+              .   :1t1;;;,..,,,.,;..;:,:t::ii1i,                  
+            .  .iffi:,...,,.,,,,,,,,:,,::,.. .t1t;.               
+           . .ift:. .,,,,,. ....,,,,.,:,,,..,.,.:ifi. .           
+          . ;L1,,..,,.,,......,.,,,,..,,.,,..,:,..:1f: .          
+        .  tf:..,,.....;:.. ..,,,;;:.,...,,:,....,, :Lt .         
+       .  Lt,,...:i1;..,,.....,.,:i,,,,,.,...;ii,..,,,tt .        
+       . f1,,, 1CGGG0G:...,,:...,:;,:,,,., iGGCCCL: ,,.tt .       
+      . iL .. t8fi..;CG.,......,,::.,.,...:8t::;;f0; ., L; .      
+       .C:.:.10t;,...;0L.,.,.,,,,:.,,,,,.:8L::;;.:tG,.,.;C        
+     . iL,., t0;;,.,;f8i.,.,,,,...,,,:.,,,f0t:.:.;;8,...,C: .     
+     . tt..,::CLtttfCG; ,...,,..,.,.,,.,.,.tGLtftfGt:,..,f1 .     
+     . ft,..1i.ifLt1i,.,,,,,:,1:..11,:,,.,: ,itLff;.t:,,,tt .     
+     . tf,.,.,:.,:.  ...,.,.,,:,..::.,..,,... .,...,....,f1 .     
+     . ;C;.,i,..,:,.....,..,,,,,,:,,,:  .,..,:;;,.. ,:..:C: .     
+       .Ci.:ii..,;...,:;t1fftCCCLLLLftt1i1;:.::;.. ,1:.:fL        
+      . iC,. ;1ii1;1fCfGtfL,Ci,L.iC.ft:GiLLLLf1i;;i1:.,;G: .      
+       . tL:,.,iiC@@f1i1i;t:tiiti1f;ti;f:tiitL@8L1;.,:tC1 .       
+          tCi:.,.:fCtitit.i,;;,1,;t,1,:i,f;11fC1:...:tGt .        
+           1Cf:.:..;ttLCC1G1LL10tL81GtfC1LLft1;::,,:fCi .         
+          . :LLi:..,,,;t1t1tttLfLLffttttt11:,,;:.:fCf, .          
+           .  ;LCti,.,..,;:;:;iii1ii;;;:;....,;iLCf;  .           
+                ;fCGfi:,,,. ,.,....,, ,,i,;i1f0Gt:                
+                  .;tLLLGL1;tf,;1ti1tiffGCGGLt;.                  
+                     .,;1fLCG0CCG80GGCLLf1;,                      
+                           ..,::::,,,..                           
+
+                                  ${Ansi.RED} :: Spring Boot${spring-boot.formatted-version} :: ${Ansi.DEFAULT}
+
+                                 
