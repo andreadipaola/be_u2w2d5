@@ -1,6 +1,6 @@
 package app.utente;
 
-import java.util.Set;
+import java.util.List;
 import java.util.UUID;
 
 import app.dispositivo.Dispositivo;
@@ -24,9 +24,19 @@ public class Utente {
 	@GeneratedValue
 	@Column(name = "id_utente")
 	private UUID idUtente;
-	private String username;
 	private String nome;
 	private String cognome;
+	private String email;
+	private String username;
+	private String password;
 	@OneToMany(mappedBy = "utente")
-	private Set<Dispositivo> dispositivi;
+	private List<Dispositivo> dispositivi;
+
+	public Utente(String nome, String cognome, String email, String username, String password) {
+		this.nome = nome;
+		this.cognome = cognome;
+		this.email = email;
+		this.password = password;
+		this.username = username;
+	}
 }
