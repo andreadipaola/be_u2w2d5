@@ -19,6 +19,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+// Ho lasciato i commenti per avere una referenza per il futuro
 @Component
 public class JWTAuthFilter extends OncePerRequestFilter {
 	@Autowired
@@ -43,7 +44,6 @@ public class JWTAuthFilter extends OncePerRequestFilter {
 
 		// 3.0 Estraggo l'email dal token e cerco l'utente
 		String email = JWTTools.extractSubject(accessToken);
-		System.out.println("******************************** " + email);
 		try {
 			Utente utente = utenteService.findByEmail(email);
 
@@ -58,8 +58,7 @@ public class JWTAuthFilter extends OncePerRequestFilter {
 			// 3.2 puoi procedere al prossimo blocco della filterChain
 			filterChain.doFilter(request, response);
 		} catch (NotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new NotFoundException("Utente non presente nel DB.");
 		}
 
 		// 4. Se non OK -> 401 ("Per favore effettua di nuovo il login")

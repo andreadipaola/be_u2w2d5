@@ -30,7 +30,7 @@ public class AuthController {
 //		return new Utente();
 //	}
 
-	// Versione 2
+	// Versione 2 con ResponseEntity e validazione
 	@PostMapping("/register")
 	public ResponseEntity<Utente> register(@RequestBody @Validated UtentePayload body) {
 		Utente createdUtente = utenteService.create(body);
@@ -45,9 +45,9 @@ public class AuthController {
 //		return token;
 //	}
 
-	// Versione 2
+	// Versione 3 con ResponseEntity, personalizzazione del token e validazione
 //	@PostMapping("/login")
-//	public ResponseEntity<AuthenticationSuccessfullPayload> login(@RequestBody UtenteLoginPayload body) {
+//	public ResponseEntity<AuthenticationSuccessfullPayload> login(@RequestBody @Validated UtenteLoginPayload body) {
 //
 //		Utente u = new Utente("John", "Doe", "john@doe.com", "johndoe1", "1234");
 //		String token = JWTTools.createToken(u);
@@ -55,14 +55,15 @@ public class AuthController {
 //		return new ResponseEntity<>(new AuthenticationSuccessfullPayload(token), HttpStatus.OK);
 //	}
 
-	// Versione 3
+	// Versione 3 con ResponseEntity, personalizzazione del token, validazione e
+	// controllo della password
 	@PostMapping("/login")
 	public ResponseEntity<AuthenticationSuccessfullPayload> login(@RequestBody @Validated UtenteLoginPayload body)
 			throws NotFoundException {
-		Utente user = utenteService.findByEmail(body.getEmail());
-		if (!body.getPassword().matches(user.getPassword()))
+		Utente utente = utenteService.findByEmail(body.getEmail());
+		if (!body.getPassword().matches(utente.getPassword()))
 			throw new UnauthorizedException("Credenziali non valide");
-		String token = JWTTools.createToken(user);
+		String token = JWTTools.createToken(utente);
 
 		return new ResponseEntity<>(new AuthenticationSuccessfullPayload(token), HttpStatus.OK);
 	}

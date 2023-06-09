@@ -1,9 +1,9 @@
 package app.dispositivo;
 
-import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+
+import app.exceptions.NotFoundException;
 
 @RestController
 @RequestMapping("/dispositivi")
@@ -24,17 +27,25 @@ public class DispositivoController {
 
 	// -------------------------- GET SU DISPOSITIVI -----------------------------
 	// Versione 1 (GET: http://localhost:3001/dispositivi) OK
+//	@GetMapping("")
+//	public List<Dispositivo> getDispositivi() {
+//		return dispositivoService.find();
+//	}
+
+	// Versione 2 con paginazione (GET: http://localhost:3001/dispositivi) OK
 	@GetMapping("")
-	public List<Dispositivo> getDispositivi() {
-		return dispositivoService.find();
+	public Page<Dispositivo> getDispositivi(@RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id_dispositivo") String sortBy) {
+		return dispositivoService.find(page, size, sortBy);
 	}
 
 	// -------------------------- POST SU DISPOSITIVI
 	// --------------------------------
-	// Versione 2 e payload (POST: http://localhost:3001/dispositivi) OK
+	// Versione 2 e payload e validazione (POST: http://localhost:3001/dispositivi)
+	// OK
 	@PostMapping("")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Dispositivo saveDispositivo(@RequestBody @Validated Dispositivo body) {
+	public Dispositivo saveDispositivo(@RequestBody @Validated DispositivoPayload body) {
 		return dispositivoService.create(body);
 	}
 
@@ -42,16 +53,23 @@ public class DispositivoController {
 	// -----------------------------
 	// Versione 1 (GET: http://localhost:3001/dispositivi/{idDispositivo}) OK
 	@GetMapping("/{dispositivoId}")
-	public Dispositivo getUser(@PathVariable UUID dispositivoId) throws Exception {
-		return dispositivoService.findById(dispositivoId);
+	public Dispositivo getDispositivo(@PathVariable UUID idDispositivo) throws Exception {
+		return dispositivoService.findById(idDispositivo);
 	}
 
 	// ----------------------- PUT SU SINGOLO DISPOSITIVO
 	// -----------------------------
 	// Versione 1 (PUT: http://localhost:3001/dispositivi/{idDispositivo}) OK
+//	@PutMapping("/{dispositivoId}")
+//	public Dispositivo updateDispositivo(@PathVariable UUID dispositivoId, @RequestBody Dispositivo body) throws Exception {
+//		return dispositivoService.findByIdAndUpdate(dispositivoId, body);
+//	}
+
+	// Versione 2 (PUT: http://localhost:3001/dispositivi/{idDispositivo}) OK
 	@PutMapping("/{dispositivoId}")
-	public Dispositivo updateUser(@PathVariable UUID dispositivoId, @RequestBody Dispositivo body) throws Exception {
-		return dispositivoService.findByIdAndUpdate(dispositivoId, body);
+	public Dispositivo updateDispositivo(@PathVariable UUID idDispositivo,
+			@RequestBody DispositivoAssociatoPayload body) throws Exception {
+		return dispositivoService.findByIdAndUpdate(idDispositivo, body);
 	}
 
 	// -------------------- DELETE SU SINGOLO DISPOSITIVO
@@ -59,8 +77,8 @@ public class DispositivoController {
 	// Versione 1 (DELETE: http://localhost:3001/dispositivi/{idDispositivo}) OK
 	@DeleteMapping("/{dispositivoId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void deleteUser(@PathVariable UUID dispositivoId) throws Exception {
-		dispositivoService.findByIdAndDelete(dispositivoId);
+	public void deleteUser(@PathVariable UUID idDispositivo) throws NotFoundException {
+		dispositivoService.findByIdAndDelete(idDispositivo);
 	}
 
 }

@@ -41,12 +41,14 @@ public class Utente implements UserDetails {
 	@Enumerated(EnumType.STRING)
 	private Role role;
 
-	public Utente(String nome, String cognome, String email, String username, String password) {
+	public Utente(String nome, String cognome, String email, String username, String password,
+			List<Dispositivo> dispositivi) {
 		this.nome = nome;
 		this.cognome = cognome;
 		this.email = email;
-		this.password = password;
 		this.username = username;
+		this.password = password;
+		this.dispositivi = dispositivi;
 		this.role = Role.USER;
 	}
 

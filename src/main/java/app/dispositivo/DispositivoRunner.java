@@ -1,5 +1,6 @@
 package app.dispositivo;
 
+import java.util.List;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,20 +16,24 @@ public class DispositivoRunner implements CommandLineRunner {
 	@Autowired
 	DispositivoService dispositivoService;
 
-	String[] stringhePredefinite = { "Laptop", "Smartphone", "Auricolari", "Tablet" };
+//	String[] stringhePredefinite = { "Laptop", "Smartphone", "Auricolari", "Tablet" };
 
 	@Override
 //	public void run(ApplicationArguments args) throws Exception {
 	public void run(String... args) throws Exception {
+		List<Dispositivo> dispositiviDB = dispositivoService.find2();
+		if (dispositiviDB.size() == 0) {
 //		Faker faker = new Faker(new Locale("it"));
-		for (int i = 0; i < 20; i++) {
-			try {
-				String tipo = getRandomString(stringhePredefinite);
-				StatoDispositivo statoDispositivo = getRandomEnumValue(StatoDispositivo.class);
-				Dispositivo dispositivo = new Dispositivo(tipo, statoDispositivo);
-				dispositivoService.create(dispositivo);
-			} catch (Exception e) {
-				System.out.println(e);
+			for (int i = 0; i < 20; i++) {
+				try {
+//				String tipo = getRandomString(stringhePredefinite);
+					TipoDispositivo tipoDispositivo = getRandomEnumValue(TipoDispositivo.class);
+					StatoDispositivo statoDispositivo = StatoDispositivo.DISPONIBILE;
+					Dispositivo dispositivo = new Dispositivo(tipoDispositivo, statoDispositivo);
+					dispositivoService.create2(dispositivo);
+				} catch (Exception e) {
+					System.out.println(e);
+				}
 			}
 		}
 
@@ -41,10 +46,10 @@ public class DispositivoRunner implements CommandLineRunner {
 		return values[index];
 	}
 
-	public static String getRandomString(String[] array) {
-		Random random = new Random();
-		int index = random.nextInt(array.length);
-		return array[index];
-	}
+//	public static String getRandomString(String[] array) {
+//		Random random = new Random();
+//		int index = random.nextInt(array.length);
+//		return array[index];
+//	}
 
 }

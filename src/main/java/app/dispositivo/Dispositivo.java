@@ -6,6 +6,8 @@ import app.dispositivo.enums.StatoDispositivo;
 import app.utente.Utente;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -21,20 +23,27 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class Dispositivo {
+
 	@Id
 	@GeneratedValue
 	@Column(name = "id_dispositivo")
 	private UUID idDispositivo;
-	private String tipo;
+	@Enumerated(EnumType.STRING)
+	@Column(name = "tipo_dispositivo")
+	private TipoDispositivo tipoDispositivo;
+	@Enumerated(EnumType.STRING)
 	@Column(name = "stato_dispositivo")
 	private StatoDispositivo statoDispositivo;
 	@ManyToOne
 	@JoinColumn(name = "id_utente")
 	private Utente utente;
 
-	public Dispositivo(String tipo, StatoDispositivo statoDispositivo) {
-		super();
-		this.tipo = tipo;
+	public Dispositivo(TipoDispositivo tipoDispositivo) {
+		this.tipoDispositivo = tipoDispositivo;
+	}
+
+	public Dispositivo(TipoDispositivo tipoDispositivo, StatoDispositivo statoDispositivo) {
+		this.tipoDispositivo = tipoDispositivo;
 		this.statoDispositivo = statoDispositivo;
 	}
 

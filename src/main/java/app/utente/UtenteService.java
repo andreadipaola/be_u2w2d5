@@ -1,11 +1,13 @@
 package app.utente;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import app.dispositivo.Dispositivo;
 import app.exceptions.BadRequestException;
 import app.exceptions.NotFoundException;
 
@@ -28,7 +30,9 @@ public class UtenteService {
 			throw new BadRequestException(
 					"ATTENZIONE!!! L'email con la quale stai cercando di registarti è già in uso da un altro utente");
 		});
-		Utente newUtente = new Utente(u.getNome(), u.getCognome(), u.getEmail(), u.getUsername(), u.getPassword());
+		List<Dispositivo> dispositivi = new ArrayList<>();
+		Utente newUtente = new Utente(u.getNome(), u.getCognome(), u.getEmail(), u.getUsername(), u.getPassword(),
+				dispositivi);
 		return utenteRepo.save(newUtente);
 	}
 
@@ -48,8 +52,8 @@ public class UtenteService {
 		found.setNome(u.getNome());
 		found.setCognome(u.getCognome());
 		found.setEmail(u.getEmail());
-		found.setEmail(u.getUsername());
-		found.setEmail(u.getPassword());
+		found.setUsername(u.getUsername());
+		found.setPassword(u.getPassword());
 
 		return utenteRepo.save(found);
 	}
