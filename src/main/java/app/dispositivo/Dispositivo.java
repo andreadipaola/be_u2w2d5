@@ -31,4 +31,11 @@ public class Dispositivo {
 	@ManyToOne
 	@JoinColumn(name = "id_utente")
 	private Utente utente;
+
+	public Dispositivo(String tipo, StatoDispositivo statoDispositivo) {
+		super();
+		this.tipo = tipo;
+		this.statoDispositivo = statoDispositivo;
+	}
+
 }
