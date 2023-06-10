@@ -41,29 +41,29 @@ public class UtenteController {
 
 	// ----------------------- GET SU SINGOLO UTENTE -----------------------------
 	// Versione 1 (GET: http://localhost:3001/utenti/{idUtente}) OK
-	@GetMapping("/{utenteId}")
-	public Utente getUser(@PathVariable UUID utenteId) throws Exception {
-		return utenteService.findById(utenteId);
+	@GetMapping("/{idUtente}")
+	public Utente getUser(@PathVariable UUID idUtente) throws Exception {
+		return utenteService.findById(idUtente);
 	}
 
-	@GetMapping("/{id}/dispositivi")
-	public List<Dispositivo> findDispositiviUtente(@PathVariable UUID id) {
-		return utenteService.findDispositiviUtente(id);
+	@GetMapping("/{idUtente}/dispositivi")
+	public List<Dispositivo> findDispositiviUtente(@PathVariable UUID idUtente) {
+		return utenteService.findDispositiviUtente(idUtente);
 	}
 
 	// ----------------------- PUT SU SINGOLO UTENTE -----------------------------
 	// Versione 1 (PUT: http://localhost:3001/utenti/{idUtente}) OK
-	@PutMapping("/{utenteId}")
-	public Utente updateUser(@PathVariable UUID utenteId, @RequestBody Utente body) throws Exception {
-		return utenteService.findByIdAndUpdate(utenteId, body);
+	@PutMapping("/{idUtente}")
+	public Utente updateUser(@PathVariable UUID idUtente, @RequestBody Utente body) throws Exception {
+		return utenteService.findByIdAndUpdate(idUtente, body);
 	}
 
 	// -------------------- DELETE SU SINGOLO UTENTE -----------------------------
 	// Versione 1 (DELETE: http://localhost:3001/utenti/{idUtente}) OK
-	@DeleteMapping("/{utenteId}")
+	@DeleteMapping("/{idUtente}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void deleteUser(@PathVariable UUID utenteId) throws Exception {
-		utenteService.findByIdAndDelete(utenteId);
+	public void deleteUser(@PathVariable UUID idUtente) throws Exception {
+		utenteService.findByIdAndDelete(idUtente);
 	}
 
 }

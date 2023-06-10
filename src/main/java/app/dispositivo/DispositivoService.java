@@ -50,7 +50,8 @@ public class DispositivoService {
 
 //	versione 2 con payload
 	public Dispositivo create(DispositivoPayload d) {
-		Dispositivo dispositivo = new Dispositivo(d.getTipoDispositivo());
+		StatoDispositivo statoDispositivo = StatoDispositivo.DISPONIBILE;
+		Dispositivo dispositivo = new Dispositivo(d.getTipoDispositivo(), statoDispositivo);
 		return dispositivoRepo.save(dispositivo);
 	}
 
@@ -82,8 +83,9 @@ public class DispositivoService {
 		Utente utenteFound = utenteService.findById(d.getIdUtente());
 
 		dispositivoFound.setIdDispositivo(id);
-		dispositivoFound.setTipoDispositivo(d.getTipoDispositivo());
-		dispositivoFound.setStatoDispositivo(StatoDispositivo.ASSEGNATO);
+//		dispositivoFound.setTipoDispositivo(d.getTipoDispositivo());
+//		dispositivoFound.setStatoDispositivo(StatoDispositivo.ASSEGNATO);
+		dispositivoFound.setStatoDispositivo(d.getStatoDispositivo());
 		dispositivoFound.setUtente(utenteFound);
 
 		return dispositivoRepo.save(dispositivoFound);

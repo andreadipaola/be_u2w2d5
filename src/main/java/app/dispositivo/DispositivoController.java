@@ -35,7 +35,7 @@ public class DispositivoController {
 	// Versione 2 con paginazione (GET: http://localhost:3001/dispositivi) OK
 	@GetMapping("")
 	public Page<Dispositivo> getDispositivi(@RequestParam(defaultValue = "0") int page,
-			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id_dispositivo") String sortBy) {
+			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "idDispositivo") String sortBy) {
 		return dispositivoService.find(page, size, sortBy);
 	}
 
@@ -52,7 +52,7 @@ public class DispositivoController {
 	// ----------------------- GET SU SINGOLO DISPOSITIVO
 	// -----------------------------
 	// Versione 1 (GET: http://localhost:3001/dispositivi/{idDispositivo}) OK
-	@GetMapping("/{dispositivoId}")
+	@GetMapping("/{idDispositivo}")
 	public Dispositivo getDispositivo(@PathVariable UUID idDispositivo) throws Exception {
 		return dispositivoService.findById(idDispositivo);
 	}
@@ -66,7 +66,7 @@ public class DispositivoController {
 //	}
 
 	// Versione 2 (PUT: http://localhost:3001/dispositivi/{idDispositivo}) OK
-	@PutMapping("/{dispositivoId}")
+	@PutMapping("/{idDispositivo}")
 	public Dispositivo updateDispositivo(@PathVariable UUID idDispositivo,
 			@RequestBody DispositivoAssociatoPayload body) throws Exception {
 		return dispositivoService.findByIdAndUpdate(idDispositivo, body);
@@ -75,7 +75,7 @@ public class DispositivoController {
 	// -------------------- DELETE SU SINGOLO DISPOSITIVO
 	// -----------------------------
 	// Versione 1 (DELETE: http://localhost:3001/dispositivi/{idDispositivo}) OK
-	@DeleteMapping("/{dispositivoId}")
+	@DeleteMapping("/{idDispositivo}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deleteUser(@PathVariable UUID idDispositivo) throws NotFoundException {
 		dispositivoService.findByIdAndDelete(idDispositivo);
