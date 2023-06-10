@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import app.dispositivo.Dispositivo;
+
 @RestController
 @RequestMapping("/utenti")
 public class UtenteController {
@@ -42,6 +44,11 @@ public class UtenteController {
 	@GetMapping("/{utenteId}")
 	public Utente getUser(@PathVariable UUID utenteId) throws Exception {
 		return utenteService.findById(utenteId);
+	}
+
+	@GetMapping("/{id}/dispositivi")
+	public List<Dispositivo> findDispositiviUtente(@PathVariable UUID id) {
+		return utenteService.findDispositiviUtente(id);
 	}
 
 	// ----------------------- PUT SU SINGOLO UTENTE -----------------------------
