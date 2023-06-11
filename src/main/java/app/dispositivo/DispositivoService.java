@@ -78,14 +78,15 @@ public class DispositivoService {
 
 	// Versione 2 con payload 2 (PUT:
 	// http://localhost:3001/dispositivi/{idDispositivo}) OK
-	public Dispositivo findByIdAndUpdate(UUID id, DispositivoAssociatoPayload d) throws NotFoundException {
+//	public Dispositivo findByIdAndUpdate(UUID id, DispositivoAssociatoPayload d) throws NotFoundException {
+	public Dispositivo findByIdAndUpdate(UUID id, DispositivoAssociatoPayload d) {
 		Dispositivo dispositivoFound = this.findById(id);
 		Utente utenteFound = utenteService.findById(d.getIdUtente());
 
 		dispositivoFound.setIdDispositivo(id);
-//		dispositivoFound.setTipoDispositivo(d.getTipoDispositivo());
-//		dispositivoFound.setStatoDispositivo(StatoDispositivo.ASSEGNATO);
-		dispositivoFound.setStatoDispositivo(d.getStatoDispositivo());
+		dispositivoFound.setTipoDispositivo(d.getTipoDispositivo());
+		dispositivoFound.setStatoDispositivo(StatoDispositivo.ASSEGNATO);
+//		dispositivoFound.setStatoDispositivo(d.getStatoDispositivo());
 		dispositivoFound.setUtente(utenteFound);
 
 		return dispositivoRepo.save(dispositivoFound);
