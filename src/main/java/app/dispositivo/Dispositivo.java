@@ -2,6 +2,8 @@ package app.dispositivo;
 
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import app.dispositivo.enums.StatoDispositivo;
 import app.utente.Utente;
 import jakarta.persistence.Column;
@@ -36,6 +38,7 @@ public class Dispositivo {
 	private StatoDispositivo statoDispositivo;
 	@ManyToOne
 	@JoinColumn(name = "id_utente")
+	@JsonBackReference
 	private Utente utente;
 
 	public Dispositivo(TipoDispositivo tipoDispositivo) {

@@ -68,11 +68,11 @@ public class DispositivoController {
 	// Versione 2 (PUT: http://localhost:3001/dispositivi/{idDispositivo}) OK
 	@PutMapping("/{idDispositivo}")
 	public Dispositivo updateDispositivo(@PathVariable UUID idDispositivo,
-//			@RequestBody DispositivoAssociatoPayload body) throws Exception {
-			@RequestBody DispositivoAssociatoPayload body) {
-//		if (idDispositivo == null) {
-//			throw new IllegalArgumentException("L'ID del dispositivo non può essere nullo");
-//		}
+			@RequestBody @Validated DispositivoAssociatoPayload body) throws Exception {
+//			@RequestBody DispositivoAssociatoPayload body) {
+		if (idDispositivo == null) {
+			throw new IllegalArgumentException("L'ID del dispositivo non può essere nullo");
+		}
 		return dispositivoService.findByIdAndUpdate(idDispositivo, body);
 	}
 

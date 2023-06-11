@@ -12,6 +12,6 @@ public class DispositivoAssociatoPayload {
 //	@NotNull(message = "ATTENZIONE!!! Il campo Stato Dispositivo è obbligatorio")
 //	StatoDispositivo statoDispositivo;
 
-	@NotNull(message = "ATTENZIONE!!! Il campo Id Utente è obbligatorio")
+//	@NotNull(message = "ATTENZIONE!!! Il campo Id Utente è obbligatorio")
 	UUID idUtente;
 }

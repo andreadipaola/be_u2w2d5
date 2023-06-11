@@ -8,6 +8,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import app.dispositivo.Dispositivo;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -37,6 +39,7 @@ public class Utente implements UserDetails {
 	private String username;
 	private String password;
 	@OneToMany(mappedBy = "utente")
+	@JsonManagedReference
 	private List<Dispositivo> dispositivi;
 	@Enumerated(EnumType.STRING)
 	private Role role;
