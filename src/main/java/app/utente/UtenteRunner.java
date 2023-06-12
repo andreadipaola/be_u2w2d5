@@ -31,9 +31,10 @@ public class UtenteRunner implements CommandLineRunner {
 					String email = faker.internet().emailAddress();
 					String username = faker.name().username();
 					String password = faker.internet().password();
+					String creditCard = faker.finance().creditCard();
 					List<Dispositivo> dispositivi = new ArrayList<>();
 
-					Utente utente = new Utente(nome, cognome, email, username, password, dispositivi);
+					Utente utente = new Utente(nome, cognome, email, username, password, creditCard, dispositivi);
 					utenteRepo.save(utente);
 				} catch (Exception e) {
 					System.out.println(e);
