@@ -11,11 +11,19 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import jakarta.persistence.AttributeConverter;
 
 public class CreditCardConverter implements AttributeConverter<String, String> {
 	private static final String ALGORITHM = "AES/ECB/PKCS5Padding";
-	private static final String secret = "mysup3rs3cr3tttt";
+//	private static final String secret = "mysup3rs3cr3tttt";
+	private static String secret;
+
+	@Value("${spring.application.aes.secret}")
+	public void setSecret(String secretKey) {
+		secret = secretKey;
+	}
 
 //	@Autowired
 //	PasswordEncoder bcrypt;

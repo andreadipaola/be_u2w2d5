@@ -10,7 +10,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import app.dispositivo.enums.StatoDispositivo;
 import app.exceptions.NotFoundException;
 import app.utente.Utente;
 import app.utente.UtenteService;
@@ -50,8 +49,8 @@ public class DispositivoService {
 
 //	versione 2 con payload
 	public Dispositivo create(DispositivoPayload d) {
-		StatoDispositivo statoDispositivo = StatoDispositivo.DISPONIBILE;
-		Dispositivo dispositivo = new Dispositivo(d.getTipoDispositivo(), statoDispositivo);
+//		StatoDispositivo statoDispositivo = StatoDispositivo.DISPONIBILE;
+		Dispositivo dispositivo = new Dispositivo(d.getTipoDispositivo());
 		return dispositivoRepo.save(dispositivo);
 	}
 
@@ -84,8 +83,8 @@ public class DispositivoService {
 		Utente utenteFound = utenteService.findById(d.getIdUtente());
 
 		dispositivoFound.setIdDispositivo(id);
-		dispositivoFound.setTipoDispositivo(d.getTipoDispositivo());
-		dispositivoFound.setStatoDispositivo(StatoDispositivo.ASSEGNATO);
+//		dispositivoFound.setStatoDispositivo(StatoDispositivo.ASSEGNATO);
+		dispositivoFound.setStatoDispositivo(d.getStatoDispositivo());
 //		dispositivoFound.setStatoDispositivo(d.getStatoDispositivo());
 		dispositivoFound.setUtente(utenteFound);
 

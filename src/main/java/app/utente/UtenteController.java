@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +27,7 @@ public class UtenteController {
 
 	// -------------------------- GET SU UTENTI -----------------------------
 	// Versione 1 (GET: http://localhost:3001/utenti) OK
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("")
 	public List<Utente> getUtenti() {
 		return utenteService.find();
@@ -33,6 +35,7 @@ public class UtenteController {
 
 	// -------------------------- POST SU UTENTI --------------------------------
 	// Versione 2 e payload (POST: http://localhost:3001/utenti) OK
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PostMapping("")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Utente saveUser2(@RequestBody @Validated UtentePayload body) {
@@ -41,11 +44,15 @@ public class UtenteController {
 
 	// ----------------------- GET SU SINGOLO UTENTE -----------------------------
 	// Versione 1 (GET: http://localhost:3001/utenti/{idUtente}) OK
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@GetMapping("/{idUtente}")
 	public Utente getUser(@PathVariable UUID idUtente) throws Exception {
 		return utenteService.findById(idUtente);
 	}
 
+	// ------------ GET PER OTTENERE I DISPOSITIVI DEL SINGOLO UTENTE -------------
+	// Versione 1 (GET: http://localhost:3001/utenti/{idUtente}/dispositivi) OK
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@GetMapping("/{idUtente}/dispositivi")
 	public List<Dispositivo> findDispositiviUtente(@PathVariable UUID idUtente) {
 		return utenteService.findDispositiviUtente(idUtente);
@@ -53,6 +60,7 @@ public class UtenteController {
 
 	// ----------------------- PUT SU SINGOLO UTENTE -----------------------------
 	// Versione 1 (PUT: http://localhost:3001/utenti/{idUtente}) OK
+	@PreAuthorize("hasRole('ADMIN')")
 	@PutMapping("/{idUtente}")
 	public Utente updateUser(@PathVariable UUID idUtente, @RequestBody Utente body) throws Exception {
 		return utenteService.findByIdAndUpdate(idUtente, body);
@@ -60,6 +68,7 @@ public class UtenteController {
 
 	// -------------------- DELETE SU SINGOLO UTENTE -----------------------------
 	// Versione 1 (DELETE: http://localhost:3001/utenti/{idUtente}) OK
+	@PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping("/{idUtente}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deleteUser(@PathVariable UUID idUtente) throws Exception {

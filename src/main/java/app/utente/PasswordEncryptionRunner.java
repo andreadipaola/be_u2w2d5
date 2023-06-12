@@ -8,6 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
+//@Order(2)
 public class PasswordEncryptionRunner implements CommandLineRunner {
 	@Autowired
 	private UtenteRepository utenteRepo;

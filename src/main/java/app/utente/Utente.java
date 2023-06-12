@@ -30,8 +30,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@JsonIgnoreProperties({ "password", "creditCard", "role", "enabled", "accountNonExpired", "accountNonLocked",
-		"credentialsNonExpired", "authorities" })
+@JsonIgnoreProperties({ "enabled", "accountNonExpired", "accountNonLocked", "credentialsNonExpired", "authorities" })
 public class Utente implements UserDetails {
 	@Id
 	@GeneratedValue
@@ -48,10 +47,10 @@ public class Utente implements UserDetails {
 	@JsonManagedReference
 	private List<Dispositivo> dispositivi;
 	@Enumerated(EnumType.STRING)
-	private Role role;
+	private Ruolo ruolo;
 
 	public Utente(String nome, String cognome, String email, String username, String password, String creditCard,
-			List<Dispositivo> dispositivi) {
+			List<Dispositivo> dispositivi, Ruolo ruolo) {
 		this.nome = nome;
 		this.cognome = cognome;
 		this.email = email;
@@ -59,12 +58,12 @@ public class Utente implements UserDetails {
 		this.password = password;
 		this.creditCard = creditCard;
 		this.dispositivi = dispositivi;
-		this.role = Role.USER;
+		this.ruolo = ruolo;
 	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return List.of(new SimpleGrantedAuthority(role.name()));
+		return List.of(new SimpleGrantedAuthority(ruolo.name()));
 	}
 
 //	@Override

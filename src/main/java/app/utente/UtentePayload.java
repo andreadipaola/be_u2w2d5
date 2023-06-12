@@ -21,4 +21,5 @@ public class UtentePayload {
 //	@Size(min = 3, max = 30, message = "ATTENZIONE!!! la password deve essere minimo di 8 caratteri e massimo di 20")
 	String password;
 	String creditCard;
+	Ruolo ruolo;
 }

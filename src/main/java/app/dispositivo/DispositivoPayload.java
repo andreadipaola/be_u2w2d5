@@ -5,6 +5,6 @@ import lombok.Getter;
 
 @Getter
 public class DispositivoPayload {
-	@NotNull(message = "ATTENZIONE!!! Il campo Tipo è obbligatorio")
+	@NotNull(message = "ATTENZIONE!!! Il campo Tipo Dispositivo è obbligatorio")
 	TipoDispositivo tipoDispositivo;
 }

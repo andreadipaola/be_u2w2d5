@@ -1,5 +1,5 @@
 package app.utente;
 
-public enum Role {
+public enum Ruolo {
     ADMIN, USER
 }

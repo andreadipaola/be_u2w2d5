@@ -32,7 +32,7 @@ public class UtenteService {
 		});
 		List<Dispositivo> dispositivi = new ArrayList<>();
 		Utente newUtente = new Utente(u.getNome(), u.getCognome(), u.getEmail(), u.getUsername(), u.getPassword(),
-				u.getCreditCard(), dispositivi);
+				u.getCreditCard(), dispositivi, u.getRuolo());
 		return utenteRepo.save(newUtente);
 	}
 
@@ -54,6 +54,8 @@ public class UtenteService {
 		found.setEmail(u.getEmail());
 		found.setUsername(u.getUsername());
 		found.setPassword(u.getPassword());
+		found.setCreditCard(u.getCreditCard());
+		found.setRuolo(u.getRuolo());
 
 		return utenteRepo.save(found);
 	}

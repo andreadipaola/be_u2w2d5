@@ -7,10 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import app.dispositivo.enums.StatoDispositivo;
-
 @Component
-//@Order(1)
+//@Order(3)
 //public class DispositivoRunner implements ApplicationRunner {
 public class DispositivoRunner implements CommandLineRunner {
 	@Autowired
@@ -21,15 +19,14 @@ public class DispositivoRunner implements CommandLineRunner {
 	@Override
 //	public void run(ApplicationArguments args) throws Exception {
 	public void run(String... args) throws Exception {
-		List<Dispositivo> dispositiviDB = dispositivoService.find2();
-		if (dispositiviDB.size() == 0) {
+		List<Dispositivo> dispositivi = dispositivoService.find2();
+		if (dispositivi.size() == 0) {
 //		Faker faker = new Faker(new Locale("it"));
 			for (int i = 0; i < 20; i++) {
 				try {
 //				String tipo = getRandomString(stringhePredefinite);
 					TipoDispositivo tipoDispositivo = getRandomEnumValue(TipoDispositivo.class);
-					StatoDispositivo statoDispositivo = StatoDispositivo.DISPONIBILE;
-					Dispositivo dispositivo = new Dispositivo(tipoDispositivo, statoDispositivo);
+					Dispositivo dispositivo = new Dispositivo(tipoDispositivo);
 					dispositivoService.create2(dispositivo);
 				} catch (Exception e) {
 					System.out.println(e);

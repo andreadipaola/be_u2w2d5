@@ -35,7 +35,7 @@ public class Dispositivo {
 	private TipoDispositivo tipoDispositivo;
 	@Enumerated(EnumType.STRING)
 	@Column(name = "stato_dispositivo")
-	private StatoDispositivo statoDispositivo;
+	private StatoDispositivo statoDispositivo = StatoDispositivo.DISPONIBILE;;
 	@ManyToOne
 	@JoinColumn(name = "id_utente")
 	@JsonBackReference
@@ -45,9 +45,12 @@ public class Dispositivo {
 		this.tipoDispositivo = tipoDispositivo;
 	}
 
-	public Dispositivo(TipoDispositivo tipoDispositivo, StatoDispositivo statoDispositivo) {
-		this.tipoDispositivo = tipoDispositivo;
+	public Dispositivo(StatoDispositivo statoDispositivo) {
 		this.statoDispositivo = statoDispositivo;
 	}
+
+//	public Dispositivo(TipoDispositivo tipoDispositivo, StatoDispositivo statoDispositivo) {
+//		this.statoDispositivo = statoDispositivo;
+//	}
 
 }

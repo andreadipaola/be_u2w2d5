@@ -13,6 +13,7 @@ import com.github.javafaker.Faker;
 import app.dispositivo.Dispositivo;
 
 @Component
+//@Order(1)
 public class UtenteRunner implements CommandLineRunner {
 	@Autowired
 	UtenteRepository utenteRepo;
@@ -21,9 +22,9 @@ public class UtenteRunner implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		Faker faker = new Faker(new Locale("it"));
 
-		List<Utente> usersDB = utenteRepo.findAll();
+		List<Utente> utenti = utenteRepo.findAll();
 
-		if (usersDB.size() == 0) {
+		if (utenti.size() == 0) {
 			for (int i = 0; i < 10; i++) {
 				try {
 					String nome = faker.name().firstName();
@@ -33,8 +34,10 @@ public class UtenteRunner implements CommandLineRunner {
 					String password = faker.internet().password();
 					String creditCard = faker.finance().creditCard();
 					List<Dispositivo> dispositivi = new ArrayList<>();
+					Ruolo ruolo = Ruolo.USER;
 
-					Utente utente = new Utente(nome, cognome, email, username, password, creditCard, dispositivi);
+					Utente utente = new Utente(nome, cognome, email, username, password, creditCard, dispositivi,
+							ruolo);
 					utenteRepo.save(utente);
 				} catch (Exception e) {
 					System.out.println(e);
