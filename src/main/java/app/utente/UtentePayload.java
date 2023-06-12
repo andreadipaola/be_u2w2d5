@@ -2,10 +2,11 @@ package app.utente;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 public class UtentePayload {
 	@NotNull(message = "ATTENZIONE!!! Il campo Nome è obbligatorio")
 	String nome;
@@ -17,6 +18,6 @@ public class UtentePayload {
 	@NotNull(message = "ATTENZIONE!!! Il campo Username è obbligatorio")
 	String username;
 	@NotNull(message = "ATTENZIONE!!! Il campo password è obbligatorio")
-	@Size(min = 3, max = 30, message = "ATTENZIONE!!! la password deve essere minimo di 8 caratteri e massimo di 20")
+//	@Size(min = 3, max = 30, message = "ATTENZIONE!!! la password deve essere minimo di 8 caratteri e massimo di 20")
 	String password;
 }
