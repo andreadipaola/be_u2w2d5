@@ -36,3 +36,8 @@ public class PasswordEncryptionRunner implements CommandLineRunner {
 		utenteRepo.saveAll(utenti);
 	}
 }
+
+//if (!bcrypt.matches(plainPW, hashedPW)) {
+//String encryptedPassword = bcrypt.encode(plainPW);
+//utente.setPassword(encryptedPassword);
+//utenteRepo.save(utente);

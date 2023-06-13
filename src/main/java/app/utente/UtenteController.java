@@ -44,7 +44,7 @@ public class UtenteController {
 
 	// ----------------------- GET SU SINGOLO UTENTE -----------------------------
 	// Versione 1 (GET: http://localhost:3001/utenti/{idUtente}) OK
-	@PreAuthorize("hasAnyRole('ADMIN')")
+	@PreAuthorize("hasAnyRole('ADMIN', 'USER')")
 	@GetMapping("/{idUtente}")
 	public Utente getUser(@PathVariable UUID idUtente) throws Exception {
 		return utenteService.findById(idUtente);
