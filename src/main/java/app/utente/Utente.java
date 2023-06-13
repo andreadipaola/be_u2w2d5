@@ -30,7 +30,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@JsonIgnoreProperties({ "enabled", "accountNonExpired", "accountNonLocked", "credentialsNonExpired", "authorities" })
+@JsonIgnoreProperties({ "password", "creditCard", "enabled", "accountNonExpired", "accountNonLocked",
+		"credentialsNonExpired", "authorities" })
 public class Utente implements UserDetails {
 	@Id
 	@GeneratedValue

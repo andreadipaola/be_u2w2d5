@@ -1,6 +1,7 @@
 package app.auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -8,7 +9,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import app.exceptions.NotFoundException;
 import app.exceptions.UnauthorizedException;
@@ -42,14 +45,30 @@ public class AuthController {
 //	}
 
 	// Versione 3 con ResponseEntity e validazione e BCrypt
+//	@PostMapping("/register")
+//	public ResponseEntity<Utente> register(@RequestBody @Validated UtentePayload body) {
+//
+//		body.setPassword(bcrypt.encode(body.getPassword()));
+//		Utente createdUtente = utenteService.create(body);
+//		return new ResponseEntity<>(createdUtente, HttpStatus.CREATED);
+//	}
+//	
+	// Versione 4 con ResponseEntity e validazione e BCrypt e invio email di
+	// conferma
 	@PostMapping("/register")
-	public ResponseEntity<Utente> register(@RequestBody @Validated UtentePayload body) {
+	@ResponseStatus(HttpStatus.CREATED)
+	public Utente saveUtente(@RequestBody @Validated UtentePayload body) {
+		RestTemplate restTemplate = new RestTemplate();
 
 		body.setPassword(bcrypt.encode(body.getPassword()));
 		Utente createdUtente = utenteService.create(body);
-		return new ResponseEntity<>(createdUtente, HttpStatus.CREATED);
-	}
 
+		HttpEntity<Utente> requestBody = new HttpEntity<Utente>(createdUtente);
+		restTemplate.postForObject("http://localhost:3002/auth/register", requestBody, Utente.class);
+
+		return createdUtente;
+
+	}
 	// Versione 1
 //	@PostMapping("/login")
 //	public String login(@RequestBody UtenteLoginPayload body) {
